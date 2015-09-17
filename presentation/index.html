@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>reveal.js - The HTML Presentation Framework</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>React & Flux</h1>
+					<img style="width:27%" data-src="./img/react-logo.png" alt="">
+					<span style="width:23px;display:inline-block"></span>
+					<img style="width:27%" data-src="./img/flux_logo.svg" alt="">
+					<p>
+						<small>Presented by Frederik Bouillon</small>
+					</p>
+
+					<aside class="notes">
+						<p>
+							Goeiemorgen iedereen,
+						</p>
+						<p>
+							Ik ben Frederik Bouillon en ik kom jullie vandaag iets meer vertellen over React & Flux.							
+						</p>
+						<p>
+							Voor de mensen die mij nog niet goed kennen, ik ben 28 jaar en afkomstig uit geel. Ik werk bij euricom sinds begin dit jaar waarin ik gestart ben in het tweede frontend bootcamp.
+						</p>
+						<p>
+							Sinds begin juni ben ik actief bij de klant Digipolis. Digipolis staat in voor alle IT-software van de provincie antwerpen waaronder software voor brandweer, politie, enz. Zelf werk ik mee aan een project voor politie antwerpen.						
+						</p>
+						<p>
+							Dit is meteen ook de reden waarom ik hier kom vertellen over React & flux, namelijk omdat we deze technologieen gebruiken voor mijn project op digipolis.							
+						</p>
+						<h1>AGENDA</h1>
+						<p>
+							Ik ga beginnen met wat theorie over react gevolgd door een live demo.
+						</p>
+						<p>
+							Vervolgens ga ik verder met Flux waarbij ik het concept zal toelichten waarna ook een voorbeeld volgt waarbij ik met jullie doorheen de code zal gaan.
+						</p>
+						<h1>POSITIONERING REACT EN FLUX</h1>
+						<p>
+							Voor dat ik dieper in ga op React wil ik jullie eerst even snel een kort overzicht geven van wat de rollen precies zijn van react en flux.
+						</p>
+						<p>
+							De opzet van een applicatie gebouwd in react en flux volgt niet de MVC structuur maar als we de vergelijking zouden maken kunnen we zeggen dat React aanschouwd wordt als de V. De rol van flux speelt zich meer af in door meer structuur te brengen in onze applicatie (en wat meer separation of concern) en kunnen we daardoor meer vergelijking met de M en de C.
+						</p>						
+					</aside>
+				</section>
+
+				<section>
+					<h2>React</h2>
+					<p>
+						A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES
+					</p>
+
+					<aside class="notes">
+						<p>
+							React is een open-source Javascript library voor het creëren van single-page applicatie web applicaties. Zoals ik daarnet al vertelde wordt React aanschouwd als de V van in MVC. React is dus geen framework zoals Angular.
+						</p>
+						<p>
+							React werd ontwikkeld door Facebook voor het oplossen van 1 probleem. Namelijk voor het bouwen van grote applicaties met data die met verloop van tijd zal veranderen.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Component based</h2>
+					<img style="width:70%" data-src="./img/ReactComponentBreakdown.png" alt="">
+
+					<aside class="notes">
+						<p>
+							In react draait alles rond componenten. Ze zijn in feite de bouwstenen van react. Je kan deze vergelijken met directives van angular. Een react component is een verzameling van HTML, CSS en Javascript.
+						</p>
+						<p>
+							In dit voorbeeld heb ik mijn linked-in profiel pagina even logisch onderverdeeld in components. Zoals je kan zien kunnen deze components gebruikt worden als container die op hun beurt weer andere components bevatten.
+						</p>
+						<p>
+							Wat react zo speciaal maakt voor het bouwen van web interfaces is dat je zelf kan bepalen of een component al dan niet data bevat. Zo heb je bv een react component die kan dienen als een soort van container of met andere woorden parent voor andere components. Op deze parent wordt dan meestal de data bijgehouden welke deze op zijn beurt kan doorgeven aan zijn onderliggende components.
+						</p>
+						<p>
+							In dit voorbeeld zouden we kunnen zeggen dat de blauwe component verantwoordelijk is voor de statistieken van mijn profiel pagina. Dit wordt hier dan onderveeld in 2 stukken namelijk enerzijds hoe sterk mijn profiel is en anderzijds hoeveel keer mijn pagina bezocht is. In dit vb zou bv onze blauwe container verantwoordelijk zijn voor het beheren van deze data. Vervolgens zal ze deze data simpleweg doorgeven aan de onderliggende componenten.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Hello World</h2>
+					<img  data-src="./img/HelloWorld.png" alt="Up arrow">
+
+					<aside class="notes">
+						<p>
+							Om jullie een idee te geven hoe een component er nu in code uitziet zien we hier een hello world voorbeeld.
+						</p>
+						<p>
+							De aanmaak van een react component gebeurt door de createClass functie van de react library. Deze functie verwacht een object waarin de component opgebouwd word. Het resultaat van deze functie slagen we op in een variabele HelloWorld.
+						</p>
+						<p>
+							Een vereiste voor elke component is de render method. Deze method bevat de template van de component. In dit voorbeeld zal de tekst ‘hello world’ getoond worden wanneer deze component gerendered word.
+						</p>
+						<p>
+							Eens de component correct is opgebouwd dienen we hem nog te renderen. Dit doen we met React.render. Deze functie verwacht 2 argumenten. Als eerste de component die je wil renderen (HelloWorld) en als tweede argument het htlm element waarop je de component wil renderen. In dit voorbeeld zeggen we aan React om onze component te renderen op het element met ‘app’ als ID. 
+						</p>
+						<p>
+							Door de parent/child relatie van react componenten hoeven we deze react.render maar 1 keer uit te voeren. Door de hoogste parent component te renderen worden al zijn child components ook gerendered.
+						</p>
+						<h3>JSX</h3>
+						<p>
+							Zoals je misschien al hebt opgemerkt heb ik de HTML (of toch iets wat er op lijkt) van deze component rechtstreeks in mijn javascript staan. Zo wordt er in React niet verwezen naar een .htlm file die de template bevat. Dit zou namelijk ook niet lukken aangezien de HTML die je ziet staan in de render method eigelijk geen echte HTML is. Het stukje code wat lijkt op de HTML is eigenlijk JSX. JSX is een soort van XML extentie op javascript.
+						</p>
+						<p>
+							JSX laat ons toe om onze layout te maken in onze vertrouwde HTML syntax die dan later achter de schermen getransformeerd zal worden naar javascript objecten. Waarom javascript objecten vragen jullie zich waarschijnlijk af. Omdat React vervolgens een virtuele DOM zal opbouwen met deze objecten. Of met andere woorden een javascript presentatie van de actuele DOM.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>JSX transformation</h2>
+					<img  data-src="./img/HelloWorld_JSX.png" alt="" style="max-width: 80%">
+					<div style="margin:-35px">
+						<img width="78" height="78" data-src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
+					</div>
+					<img  data-src="./img/HelloWorld_JS.png" alt="" style="max-width: 80%">
+
+					<aside class="notes">
+						<p>
+							Hier zie je een voorbeeld van onze react component na de transformatie van de JSX
+						</p>
+						<p>
+							Je zou je react componenten dus ook op deze manier kunnen definieren. Maar zoals je kan zien is dit minder leesbaar en meer vatbaar voor typos of fouten.
+						</p>
+						<p>
+							Het transformatie process van JSX naar JS gebeurt meestal in het build process.
+						</p>
+						<h3>HTML attributen en events</h3>
+						<p>
+							Al onze vertrouwde HTML attributen en events zijn eveneens beschikbaar in JSX. Het enige verschil is dat deze in camelcase moeten gedefinieerd worden in plaats van de lowercase stijl van HTML.
+						</p>
+						<p>
+							Bijkomend schrijven we HTML elementen zonder hoofdletter en onze react componenten wel met hoofdletter. Op deze manier maakt react het onderscheid tussen onze custom componenten en html tags
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>The virtual DOM</h2>
+					<img data-src="./img/React_VirtualDom.png" alt="Up arrow" class="fragment">
+					<aside class="notes">
+						<p>
+							De reden waarom React zo performant werkt is doordat het nooit rechtstreeks met de DOM praat. React onderhoud namelijk zelf een zeer snelle in-memory voorstelling van de DOM, ook wel virtuele DOM genoemd.
+						</p>
+						<p>
+							Bij elke data wijziging zal react namelijk een nieuwe virtuele DOM aanmaken en deze vergelijken met huidige virtuele DOM die de data wijzigingen nog niet bevat. React zal deze 2 versies van de  virtuele DOM met elkaar vergelijken en de actuele DOM enkel updaten met deze verschillen. Op deze manier zal niet steeds de ganse DOM geupdate worden bij een data wijziging maar enkel de zaken die hierdoor geaffecteerd zijn.
+						</p>
+						<p>
+							Het updaten van de DOM gaat in veel gevallen vroeg of laat voor performantie problemen binnen een web applicatie, zeker wanneer deze uitgroeit tot een grote app. Dit komt meestal omdat we heel onze pagina of bepaalde views volledig opnieuw moeten inladen bij een data wijziging. React minimaliseert deze issue door met zijn virtuele dom enkel de gewijzigde elementen van de actuele DOM aan te passen.
+					</aside>
+				</section>
+
+				<section>
+					<h2>Demo React</h2>
+				</section>
+
+				<!-- <section>
+					<h2>Adding state to your component</h2>
+
+					<aside class="notes">
+						<p>
+							React gaat op simpele manier om met het beheer van de verschillende states binnen een applicatie. Elke react component heeft namelijk de mogelijk om zijn eigen state bij te houden. Dit is natuurlijk niet verplicht of noodzakelijk. Een component dat state bijhoudt kan bv dienen als een parent die dan op zijn beurt zijn state doorgeeft aan zijn children.
+						</p>
+						<h3>Demo ADDING STATE</h3>
+						<p>
+							In het volgende voorbeeld wordt een component met state aangemaakt. Zoals jullie kunnen zien hebben we een bijkomende methode. 'GetInitialState' is een methode die steeds een javascript object dient te returnen. Dit object  bevat de data/state van je component. In ons voorbeeld gaan we een username bijhouden. Deze data is nu beschikbaar binnen onze component en kan dus  nu worden opgevraagd in onze render methode.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Editing your component state</h2>
+
+						<aside class="notes">
+							<p>
+								De state kan uiteraard ook gewijzigd worden. Dit doen we door middel van de methode 'setState'. 
+							</p>
+						</aside>
+					</section>
+
+					<section>
+						<img data-src="./img/React_VirtualDom.png" alt="Up arrow">	
+						<ol>
+							<li style="padding:0px">SIGNAAL AAN ONZE APPLICATIE WANNEER ER EEN DATA WIJZIGING PLAATSVIND</li>
+							<li style="padding:0px">RE-RENDER DE VIRTUELE DOM</li>
+							<li style="padding:0px">VERGELIJK VORIGE VIRTUELE DOM MET DE NIEUWE</li>
+							<li style="padding:0px">UPDATE ENKEL DE VERSCHILLEN MET DE ECHTE DOM</li>
+						</ol>
+
+						<aside class="notes">
+							<p>
+								Het signaal dat er een data wijziging plaatsvind wordt getriggert dmv setState. Elke keer deze methode wordt aangesproken zal React een nieuwe virtuele dom maken mijn de nieuwe data. Deze wordt op zijn beurt vergeleken met de oude virtuele dom.  De echte DOM wordt dan aangepast waar nodig.
+							</p>
+							<h3>Demo EDITING STATE</h3>
+							<p>
+								In het volgende voorbeeld gaan we gebruik maken van een input box die de state van onze component zal aanpassen door het wijzigen van de username.
+							</p>
+							<p>
+								Om ervoor te zorgen dat onze username geupdate wordt, moeten we gaan luisteren op onze input box naar wijzegingen. Dit doen we door een nieuwe methode 'handleChange' toe te voegen aan onze component. Deze methode linken we vervolgens aan het onChange event van onze inputbox. Wanneer we nu iets in de inputbox typen zal deze methode gecalled worden en onze state updaten.
+							</p>
+							<p>
+								Doordat we de state updaten zal react een nieuwe virtuele DOM aanmaken, de verschillen registreren en hiermee de actuele DOM updaten.
+							</p>
+							<p>
+								Het process van ons voorbeeld ziet er als volgt uit:
+							</p>
+							<ol>
+								<li>Een gebruiker voert text in de inputbox</li>
+								<li>HandleChange word aangeroepen.</li>
+								<li>De state van onze applicatie word geupdate met de nieuwe value van onze inputbox</li>
+								<li>React re-renders de virtuele dom</li>
+								<li>React maakt zijn vergelijking</li>
+								<li>De actuele dom word geupdate</li>
+							</ol>
+						</aside>
+					</section>
+				</section>
+
+				<section >
+					<h2>Passing state to child components</h2>
+					<h2 style="padding-top:75px">-> Props <-</h2>
+
+					<aside class="notes">
+						<p>
+							Components die zelf geen state bijhouden zijn meestal child van een parent component die voor hun de state bijhoudt. De parent component moet dus op een of andere manier zijn data doorgeven aan zijn onderliggende components. Dit gebeurt via 'props'.
+						</p>
+						<p>
+							Dit zorgt voor een zeer duidelijke architectuur en logische opbouw van onze interface. Als best practice word state bijgehouden op de hoogste parent component die relevant is ten opzichte van de data die in de state word bijgehouden. Deze parent component geeft op zijn beurt de data uit zijn state door naar de geinteresseerde onderliggende componenten.
+						</p>
+						<h2>Demo PASSING STATE</h2>
+							<p>
+								In het volgende voorbeeld gaan we gebruik maken van een input box die de state van onze component zal aanpassen door het wijzigen van de username.
+							</p>
+							<h3>Friends container</h3>
+							<p>
+								Hier maken we onze parent component aan en geven deze state. In de render methode gaan we de naam printen met daaronder een opsomming van de items uit de friends array. Voor deze opsomming gaan we een nieuwe component 'showlist' aanmaken. We geven hierbij de array van namen door.
+							</p>
+							<h3>Friends list</h3>
+							<p>
+								In onze child component showlist gaan we de verschillende namen onder elkaar uitprinten. We krijgen een referentie op onze array door this.props.names. Met behulp van de map functie, welke standaard beschikbaar is in javascript op een array,  gaan we door elk item van onze array loopen en een stukje JSX code voor elk item returnen en opslagen in een nieuwe array.
+							</p>
+							<p>
+								Vervolgens gaan kunnen we deze array gebruiken in onze return van de render methode. Variabelen of javascript logica kunnen door middel van brackets {} gebruikt worden in onze JSX.
+							</p>
+							<h2>Demo PASSING FUNCTIONS</h2>
+							<h3>Add new friend</h3>
+							<p>
+								Wanneer we data zouden willen toevoegen aan onze state wordt deze functionaliteit hiervoor best voorzien op de component welke de state bijhoudt. Deze functie kan dan vervolgens via een callback functie meegegeven worden aan child componenten via props.
+							</p>
+					</aside>
+				</section> -->
+
+				<!-- <section>
+					<h2 id="fragments">Component lifecycle</h2>
+					<ul>
+						<li class="fragment" style="padding:25px">componentWillMount</li>
+						<li class="fragment" style="padding:25px">componentDidMount</li>
+						<li class="fragment" style="padding:25px">componentWillReceiveProps</li>
+						<li class="fragment" style="padding:25px">componentWillUnmount</li>
+					</ul>
+
+					<aside class="notes">
+						<p>
+							Elke component heeft de mogelijk om enkele lifecycle events te definieren. Stel dat we een ajax request willen uitvoeren voor onze initiele render,  of extra logica willen toevoegen wanneer de props veranderen.
+						</p>
+						<p>
+							React stelt een aantal lifecycle methods ter beschikking. Hierba ga ik de meest nuttige en gebruikte even toelichten.
+						</p>
+						<h3>componentWillMount</h3>
+						<p>
+							Deze event wordt slechts 1 keer aangeroepen. Net VOOR de initiele render van de component. Het gebruik van setState heeft tijdens dit moment nog geen effect aangezien er nog geen state aangemaakt is. Dit event is vooral nuttig als je bv een referentie zou willen leggen naar Firebase. Welke je tijdens een later moment kan gebruiken om data te gaan ophalen.
+						</p>
+						<h3>componentDidMount</h3>
+						<p>
+							Deze event wordt eveneens slechts 1 keer aangeroepen. Deze gebeurt net NA de initiele render van de component. Tijdens dit moment is de component al reeds aangemaakt in de DOM en kan je deze dus raadplegen indien je zou wensen. Dit moment wordt ook gebruikt om bv je AJAX calls in te plaatsen.
+						</p>
+						<h3>componentWillReceiveProps</h3>
+						<p>
+							Deze event wordt niet aangeroepen tijdens de initiele render maar wel wanneer een van zijn props gewijzigd word. Deze methode wordt gebruikt om te reageren op een wijziging van een van de props voordat de render word uitgevoerd.
+						</p>
+						<h3>componentWillUnmount</h3>
+						<p>
+							Dit event word aangeroepen vlak voor een component uit de DOM verwijderd word. Dit moment word gebruikt voor een eventuele cleanup van listeners of connecties.
+						</p>
+					</aside>
+				</section> -->
+
+				<section>
+					<h2>Flux</h2>
+					<p>
+						DESIGN PATTERN
+					</p>
+					<img data-src="./img/flux.png" alt="" class="fragment">
+
+					<aside class="notes">
+						<p>
+							Flux is een design pattern dat net zoals react, ontwikkeld en gebruikt wordt door Facebook. Het geeft ons een structuur die zeer goed samenwerkt met React. In een react-flux verhaal wordt geen gebruik gemaakt van het MVC patroon maar eerder van een one way data flow.
+						</p>
+						<p>
+							Hoewel Flux aanzien wordt als een design pattern maakt het toch gebruik van een javascript library. Namelijk een dispatcher library. De dispatcher is een soort van global pub/sub handler die zaken (payloads) zal broadcasten naar geregistreerde callbacks. Bijkomend vinden we in een typische flux opzet ook de eventEmitter module van nodeJS terug. Deze module geeft ons de mogelijkheid om zelf custom events aan te maken waarop we vervolgens listeners voor kunnen aanmaken.
+						</p>
+						<p>
+							In volgend voorbeeld zien we een visuele voorstelling van de werking van Flux. We kunnen deze opsplitsen in 4 stukken. 
+						</p>
+						<h3>VIEW</h3>
+						<p>
+							De view in dit diagram stellen onze react componenten voor.
+						</p>
+						<p>
+							Een belangrijke verandering in onze component is dat data niet meer geinitialiseerd zal worden in de component. Aan het bijhouden van state veranderd uiteraard niets maar de data zal niet meer leven in onze componenten maar deze zal nu leven in de stores.
+						</p>
+						<p>
+							Wanneer een component zich in de DOM mount zal het zijn initiele state gaan opvragen bij een of meerdere stores.
+						</p>
+						<h3>ACTIONS</h3>
+						<p>
+							Alle functionaliteiten (zoals het updaten van onze state) van onze react component gaan we niet meer definieren in onze component zelf. In plaats hiervan gaan we actie aanspreken. Een actie bestaat meestal maar uit 2 dingen. Ten eerste een unieke naam die beschrijft wat het doel is van de actie en ten tweede de bijbehorende data indien nodig.
+						</p>
+						<h3>DISPATCHER</h3>
+						<p>
+							Een actie gaat een methode aanspreken van onze dispatcher. De dispatcher neemt zo de actie binnen en zal niets anders doen dan deze broadcasten.
+						</p>
+						<h3>STORE</h3>
+						<p>
+							Een store gaan we gebruiken voor de opslag van onze application data.
+						</p>
+						<p>
+							Een store dient zichzelf ook steeds te registreren bij onze dispatcher. Op deze manier kunnen alle acties die onze dispatcher uitstuurt worden opgevangen in onze store. Vervolgens definieren we in onze store op welke acties we willen dat hij actie moet ondernemen. En met actie ondernemen bedoel ik dat onze store zijn data zal wijzigen naargelang welke actie hij verwerkt.
+						</p>
+						<p>
+							Wanneer onze store een actie verwerkt heeft en zijn data heeft gewijzigd, gaat onze store ook een change event uitsturen. Het zijn vervolgens onze react componenten die door middel van een listener zullen luisteren naar dit change event. Op deze manier zullen onze react componenten verwittigd worden wanneer onze store nieuwe data bevat, vervolgens kunnen ze dan deze nieuwe data gaan opvragen bij de store om dan hiermee hun state te gaan updaten waardoor er een re-render zal plaatsvinden van onze views.
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Flux</h2>
+					<p>
+						DESIGN PATTERN
+					</p>
+					<img data-src="./img/flux2.png" alt="">
+
+					<aside class="notes">
+						<p>
+							Het voorbeeld van daarnet was een simpele visuele voorstelling van de werking van flux.
+						</p>
+						<p>
+							Dit voorbeeld toont meer de kracht achter flux. Zo kunnen we zien dat er meerdere stores zich kunnen inschrijven bij onze dispatcher. Deze verwerken vervolgens de acties op welke ze willen reageren. 
+						</p>
+						<p>
+							Vervolgens zullen al onze componenten die geinteresseerd zijn in de gewijzigde stores hierop reageren door zichzelf te re-renderen.  
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<h1>React & Flux</h1>
+					<img style="width:27%" data-src="./img/react-logo.png" alt="">
+					<span style="width:23px;display:inline-block"></span>
+					<img style="width:27%" data-src="./img/flux_logo.svg" alt="">
+					<p>
+						<small>The end</small>
+					</p>
+
+					<aside class="notes">
+						<p>
+							Dit was mijn presentatie van react en flux. Ik hoop dat het voor iedereen duidelijk was en dat jullie het interessant vonden.
+						</p>
+						<p>
+							Indien het voor sommige toch nog niet helemaal duidelijk of logisch lijkt, kan ik alleen maar zeggen dat dit normaal is. In principe is het allemaal heel simpel maar je hebt wel een bepaalde klik nodig. Ik moet zelf toegeven dat ik zelf in het begin niet direct deze klik had. Het is pas nadat ik door zelf voorbeelden begon uit te werken de klik heb gekregen.
+						</p>
+						<p>
+							De mensen met extra interesse kan ik alleen maar aanraden om dit zelf eens in de praktijk toe te passen.
+						</p>
+					</aside>
+				</section>
+
+				<!-- <section>
+					<h2>Flux overview</h2>
+					<img data-src="./img/flux.png" alt="Up arrow">
+
+					<aside class="notes">
+						<h3>VIEW</h3>
+						<p>
+							De view in dit diagram stellen onze react componenten voor.
+						</p>
+						<p>
+							Een belangrijke verandering in onze component is dat data niet meer geinitialiseerd zal worden in de component. Aan het bijhouden van state veranderd uiteraard niets maar de data zal niet meer leven in onze componenten maar deze leven nu in de stores.
+						</p>
+						<p>
+							Wanneer een component zich in de DOM mount zal het zijn initiele state gaan opvragen bij een of meerdere stores. Op onze component gaan we ook listeners aanmaken die gaan luisteren naar wijzigingen in de store. Op deze manier kunnen we dus onze component state gaan aanpassen elke keer de store een wijziging ondergaat.
+						</p>
+						<h3>ACTIONS</h3>
+						<p>
+							Alle functionaliteiten van onze react component gaan we niet meer definieren in onze component zelf. In plaats hiervan gaan we actie aanspreken. 
+						</p>
+						<h3>DISPATCHER</h3>
+						<p>
+							Een actie gaat een methode aanspreken van onze dispatcher. De dispatcher gaat vervolgens op zijn beurt hier een event van uitsturen samen met de eventuele actie data dat in de stores dient terecht te komen.
+						</p>
+						<h3>STORE</h3>
+						<p>
+							Een store kunnen we onderverdelen in 4 aspecten. 
+
+							Ten eerste zal deze fungeren als een opslagplaats voor een bepaalde set van data die zal gebruikt worden door onze applicatie.
+
+							Ten tweede bevat een store ook de setter methodes voor het wijzigen van de data die de store bevat.
+
+							Ten derde het store object op zich, welke niet meer is dan dan enkele change listeners en de get methods om via de store zijn data op te kunnen halen.
+
+
+
+							Een store gaat luisteren naar bepaalde events. Wanneer het een gewenst event opvangt van de dispatcher zal het hierop reageren door zijn data aan te passen. De store zal dan een change event uitsturen dat vervolgens wordt opgevangen in onze component.
+						</p>
+					</aside>
+				</section> -->
+
+				<!-- <section>
+					<h2>Component</h2>
+					<img data-src="./img/flux_component.png" style="width:54%" alt="Up arrow">
+
+					<aside class="notes">
+						<h3>Component</h3>
+						<p>
+							
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Actions</h2>
+						<img data-src="./img/flux_actions.png" style="width:90%" alt="Up arrow">
+
+						<aside class="notes">
+							<h3>ACTIONS</h3>
+							<p>
+								
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h2>Constants</h2>
+						<img data-src="./img/flux_constants.png" style="width:90%" alt="Up arrow">
+
+						<aside class="notes">
+							<h3>ACTIONS</h3>
+							<p>
+								
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<h2>Dispatcher</h2>
+					<img data-src="./img/flux_dispatcher.png" style="width:90%" alt="Up arrow">
+
+					<aside class="notes">
+						<h3>ACTIONS</h3>
+						<p>
+							
+						</p>
+					</aside>
+				</section>
+ -->
+				
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
